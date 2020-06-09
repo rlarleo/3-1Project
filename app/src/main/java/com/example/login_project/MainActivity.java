@@ -1,16 +1,23 @@
 package com.example.login_project;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserInfo;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class MainActivity extends AppCompatActivity {
+    private static final String TAG = "MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,15 +26,29 @@ public class MainActivity extends AppCompatActivity {
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser(); // 현재사용자
 
-        if(FirebaseAuth.getInstance().getCurrentUser() == null ){ // 로그인 상태확인
-            startSignUpActivity();
+        if(user == null ){ // 로그인 상태확인
+            myStartActivity(SignUpActivity.class);
         } else {
-            //회원가입 or 로그인
-            if(user != null){
-                for(UserInfo profile : user.getProviderData()){
-                    String name = profile.getDisplayName(); // 이름말고 넣으려면 데이터베이스를 써서 넣어야함
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+            DocumentReference docRef = db.collection("users").document(user.getUid());
+            docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot document = task.getResult();
+                        if(document != null){
+                            if (document.exists()) {
+                                Log.d(TAG, "DocumentSnapshot data: " + document.getData());
+                            } else {
+                                Log.d(TAG, "No such document");
+                                myStartActivity(MemberInitActivity.class);
+                            }
+                        }
+                    } else {
+                        Log.d(TAG, "get failed with ", task.getException());
+                    }
                 }
-            }
+            });
         }
 
         findViewById(R.id.logoutButton).setOnClickListener(onClickListener);
@@ -39,13 +60,13 @@ public class MainActivity extends AppCompatActivity {
             switch(v.getId()){
                 case R.id.logoutButton:
                     FirebaseAuth.getInstance().signOut();
-                    startSignUpActivity();
+                    myStartActivity(SignUpActivity.class);
                     break;
             }
         }
     };
-    private void startSignUpActivity(){
-        Intent intent = new Intent(this, SignUpActivity.class);
+    private void myStartActivity(Class c){
+        Intent intent = new Intent(this, c);
         startActivity(intent);
     }
 }
