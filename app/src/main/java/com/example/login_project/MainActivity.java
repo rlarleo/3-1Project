@@ -52,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         findViewById(R.id.logoutButton).setOnClickListener(onClickListener);
+        findViewById(R.id.MemberButton).setOnClickListener(onClickListener);
     }
 
     View.OnClickListener onClickListener = new View.OnClickListener() {
@@ -60,7 +61,14 @@ public class MainActivity extends AppCompatActivity {
             switch(v.getId()){
                 case R.id.logoutButton:
                     FirebaseAuth.getInstance().signOut();
+                    Log.d(TAG, "DocumentSnapshot data3213123123: " + "sadasdadasfasdfsdfsafsd");
+
                     myStartActivity(SignUpActivity.class);
+                    break;
+                case R.id.MemberButton:
+                    Log.d(TAG, "DocumentSnapshot data3213123123: " + "sadasdadasfasdfsdfsafsd");
+
+                    myStartActivity(MemberSetting.class);
                     break;
             }
         }

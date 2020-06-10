@@ -23,6 +23,8 @@
         </activity>
         <activity android:name=".MemberInitActivity">
         </activity>
+        <activity android:name=".MemberSetting">
+        </activity>
 
     </application>
 

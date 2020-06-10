@@ -5,7 +5,6 @@ public class MemberInfo {
     private String age;
     private String weight;
     private String height;
-
     public MemberInfo(String name, String age, String weight, String height){
         this.name = name;
         this.age = age;
@@ -40,4 +39,6 @@ public class MemberInfo {
     public void setHeight(String height){
         this.height = height;
     }
+
+
 }
