@@ -50,15 +50,19 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         }
-
+        findViewById(R.id.mapButton).setOnClickListener(onClickListener);
         findViewById(R.id.logoutButton).setOnClickListener(onClickListener);
         findViewById(R.id.MemberButton).setOnClickListener(onClickListener);
     }
+
 
     View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             switch(v.getId()){
+                case R.id.mapButton:
+                    myStartActivity(GoogleMapActivity.class);
+                    break;
                 case R.id.logoutButton:
                     FirebaseAuth.getInstance().signOut();
                     Log.d(TAG, "DocumentSnapshot data3213123123: " + "sadasdadasfasdfsdfsafsd");
