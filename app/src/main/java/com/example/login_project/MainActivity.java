@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
                     myStartActivity(MemberSetting.class);
                     break;
                 case R.id.foodButton:
-                    myStartActivity(MemberSetting.class);
+                    myStartActivity(FoodActivity.class);
                     break;
             }
         }
