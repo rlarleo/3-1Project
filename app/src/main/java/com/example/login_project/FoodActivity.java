@@ -22,9 +22,10 @@ import java.util.Map;
 
 public class FoodActivity extends AppCompatActivity {
     private static final String TAG = "MemberSetting";
-    String S_height;
-    String S_weight;
-    String S_sex;
+    String sex;
+    double height;
+    double weight;
+    double age;
     TextView rec_cal;
     TextView eat_cal;
     TextView rest_cal;
@@ -34,7 +35,6 @@ public class FoodActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food);
         initData();
-        calorieCalc();
 
     }
 
@@ -45,6 +45,8 @@ public class FoodActivity extends AppCompatActivity {
     }
 
     void initData() {
+        rec_cal = findViewById(R.id.rec_cal);
+
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         DocumentReference docRef = db.collection("users").document(user.getUid());
@@ -56,10 +58,11 @@ public class FoodActivity extends AppCompatActivity {
                     if (document.exists()) {
                         //Log.d(TAG, "DocumentSnapshot : " + document.getData());
                         Map<String, Object> map = document.getData();
-                        S_height = "" + (CharSequence) map.get("height");
-                        Log.d(TAG, "height : " + S_height);
-                        S_weight = "" + (CharSequence) map.get("weight");
-                        S_sex = "" + (CharSequence) map.get("sex");
+                        height = Double.parseDouble(""+ map.get("height"));
+                        weight = Double.parseDouble(""+ map.get("weight"));
+                        sex = ""+ map.get("sex");
+                        age = Double.parseDouble("" + map.get("age"));
+                        calorieCalc();
                     } else {
                         Log.d(TAG, "No such document");
                     }
@@ -73,10 +76,27 @@ public class FoodActivity extends AppCompatActivity {
 
     void calorieCalc() {
         rec_cal = findViewById(R.id.rec_cal);
+        eat_cal = findViewById(R.id.eat_cal);
+        rest_cal = findViewById(R.id.rest_cal);
+        double temp;
+        int temp2;
+        Log.d(TAG, "cccccccccccccccccccccccccccccccc"+ sex);
 
-        //int height = Integer.parseInt(S_height);
-        rec_cal.setText("S_height:" + S_height);
-        //String cal = Double.toString(height*height*22/10000);
+        if(sex.equals("남자")){
+            temp = (66+(13.7*weight) + (5*height)-(6.8*age))*1.55;
+            rest_cal.setText("" + temp);
+
+        }
+        else {
+            temp = (655 + (9.6 * weight) + (1.8 * height) - (4.7 * age)) * 1.55;
+            eat_cal.setText("" + temp);
+
+        }
+        temp2 = (int)temp;
+        rec_cal.setText("" + temp2);
+
+
+
 
     }
 }
