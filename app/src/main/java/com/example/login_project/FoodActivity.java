@@ -80,17 +80,12 @@ public class FoodActivity extends AppCompatActivity {
         rest_cal = findViewById(R.id.rest_cal);
         double temp;
         int temp2;
-        Log.d(TAG, "cccccccccccccccccccccccccccccccc"+ sex);
 
         if(sex.equals("남자")){
             temp = (66+(13.7*weight) + (5*height)-(6.8*age))*1.55;
-            rest_cal.setText("" + temp);
-
         }
         else {
             temp = (655 + (9.6 * weight) + (1.8 * height) - (4.7 * age)) * 1.55;
-            eat_cal.setText("" + temp);
-
         }
         temp2 = (int)temp;
         rec_cal.setText("" + temp2);
