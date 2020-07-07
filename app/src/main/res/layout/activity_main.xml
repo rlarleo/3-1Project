@@ -11,11 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-        <Button
-            android:id="@+id/mapButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="주변 헬스장 위치" />
+
         <Button
             android:id="@+id/logoutButton"
             android:layout_width="match_parent"
@@ -31,21 +27,21 @@
             android:text="회원정보" />
 
         <Button
-            android:id="@+id/MapButton"
+            android:id="@+id/mapButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="100dp"
             android:text="주변 헬스장 찾기" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/foodButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:text="추천 식단" />
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/button5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"

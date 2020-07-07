@@ -53,6 +53,8 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.mapButton).setOnClickListener(onClickListener);
         findViewById(R.id.logoutButton).setOnClickListener(onClickListener);
         findViewById(R.id.MemberButton).setOnClickListener(onClickListener);
+        findViewById(R.id.foodButton).setOnClickListener(onClickListener);
+
     }
 
 
@@ -65,13 +67,12 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case R.id.logoutButton:
                     FirebaseAuth.getInstance().signOut();
-                    Log.d(TAG, "DocumentSnapshot data3213123123: " + "sadasdadasfasdfsdfsafsd");
-
                     myStartActivity(SignUpActivity.class);
                     break;
                 case R.id.MemberButton:
-                    Log.d(TAG, "DocumentSnapshot data3213123123: " + "sadasdadasfasdfsdfsafsd");
-
+                    myStartActivity(MemberSetting.class);
+                    break;
+                case R.id.foodButton:
                     myStartActivity(MemberSetting.class);
                     break;
             }
