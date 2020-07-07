@@ -4,6 +4,7 @@ package com.example.login_project;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
@@ -21,7 +22,6 @@ public class MemberInitActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_member_init);
-
         findViewById(R.id.checkButton).setOnClickListener(onClickListener);
     }
 
@@ -48,11 +48,16 @@ public class MemberInitActivity extends AppCompatActivity {
         String age = ((EditText) findViewById(R.id.ageEditText)).getText().toString();
         String weight = ((EditText) findViewById(R.id.weightEditText)).getText().toString();
         String height = ((EditText) findViewById(R.id.heightEditText)).getText().toString();
+        CheckBox male = findViewById(R.id.male_check);
+        CheckBox female = findViewById(R.id.female_check);
+        String sex = "";
+        if(male.isChecked() == true) sex += male.getText().toString();
+        else if(female.isChecked() == true) sex += female.getText().toString();
 
-        if (name.length() > 0 && age.length() > 0 && weight.length() > 0 && height.length() > 0) {
+        if (name.length() > 0 && age.length() > 0 && weight.length() > 0 && height.length() > 0 && sex != null) {
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             FirebaseFirestore db = FirebaseFirestore.getInstance();
-            MemberInfo memberInfo = new MemberInfo(name, age, weight, height);
+            MemberInfo memberInfo = new MemberInfo(name, age, weight, height, sex);
 
             if(user != null) {
                 db.collection("users").document(user.getUid()).set(memberInfo)

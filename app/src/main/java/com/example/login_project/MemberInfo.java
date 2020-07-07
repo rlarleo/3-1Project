@@ -5,11 +5,13 @@ public class MemberInfo {
     private String age;
     private String weight;
     private String height;
-    public MemberInfo(String name, String age, String weight, String height){
+    private String sex;
+    public MemberInfo(String name, String age, String weight, String height, String sex){
         this.name = name;
         this.age = age;
         this.weight = weight;
         this.height = height;
+        this.sex = sex;
     }
 
     public String getName(){
@@ -40,5 +42,10 @@ public class MemberInfo {
         this.height = height;
     }
 
-
+    public String getSex(){
+        return this.sex;
+    }
+    public void setSex(String sex){
+        this.sex = height;
+    }
 }

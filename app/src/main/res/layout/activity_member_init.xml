@@ -51,6 +51,24 @@
             android:hint="키(cm)"
             android:inputType="date" />
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="47dp"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/male_check"
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:text="남자" />
+
+            <CheckBox
+                android:id="@+id/female_check"
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:text="여자" />
+        </LinearLayout>
+
         <Button
             android:id="@+id/checkButton"
             android:layout_width="match_parent"

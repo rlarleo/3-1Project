@@ -1,9 +1,8 @@
 package com.example.login_project;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -17,7 +16,6 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class MemberSetting extends AppCompatActivity {
@@ -27,6 +25,7 @@ public class MemberSetting extends AppCompatActivity {
     TextView ageText;
     TextView weightText;
     TextView heightText;
+    TextView sexText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,10 +43,11 @@ public class MemberSetting extends AppCompatActivity {
 
 
     private void profileSetting() {
-        nameText = (TextView)findViewById(R.id.nameText);
-        ageText = (TextView)findViewById(R.id.ageText);
-        weightText = (TextView)findViewById(R.id.weightText);
-        heightText = (TextView)findViewById(R.id.heightText);
+        nameText = findViewById(R.id.nameText);
+        ageText = findViewById(R.id.ageText);
+        weightText = findViewById(R.id.weightText);
+        heightText = findViewById(R.id.heightText);
+        sexText = findViewById(R.id.sexText);
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -64,6 +64,7 @@ public class MemberSetting extends AppCompatActivity {
                         ageText.setText("나이 : " + (CharSequence)map.get("age"));
                         weightText.setText("몸무게 : " + (CharSequence)map.get("weight"));
                         heightText.setText("키 : " + (CharSequence)map.get("height"));
+                        sexText.setText("성별 : " + (CharSequence)map.get("sex"));
 
                     }
                     else {
